@@ -1,0 +1,10 @@
+.wrap{
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15%;
+}
+
+mat-form-field {
+    margin-bottom: 5px;
+}
