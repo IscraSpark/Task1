@@ -13,6 +13,7 @@ export const getReportDataFailure = createAction('[Taskact] GET_REPORT_FAILURE')
 export const getUsers = createAction('[Taskact] GET_USERS');
 export const getUsersSuccess = createAction('[Taskact] GET_USERS_SUCCESS', props<{ user: UserForAdmin}>());
 export const getUsersFailure = createAction('[Taskact] GET_USERS_FAILURE');
+export const putForDownload = createAction('[Taskact] PUT_FOR_DOWNLOAD', props<{displayedColumns: string[], rows: UserForAdmin[]}>());
 
 
 

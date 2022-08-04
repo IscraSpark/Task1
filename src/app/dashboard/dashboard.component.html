@@ -1,5 +1,6 @@
+<div class="wrapper">
 <app-navigate></app-navigate>
-<div class="wrap">
+
   <ng-container *ngIf="(ELEMENT_DATA$ | async) as data">
   <table mat-table
   [dataSource]="data" multiTemplateDataRows class="mat-elevation-z8">

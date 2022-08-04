@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect,  ofType  } from '@ngrx/effects';
-import { catchError, switchMap, map, of } from 'rxjs';
+import { catchError, switchMap, mergeMap, map, of } from 'rxjs';
 import { AuthService } from '../auth.service';
 import { GetrepoService } from '../getrepo.service';
 import { UserInf, User, UserReports, ReportData, UserForAdmin } from '../interfaces';
@@ -48,7 +48,7 @@ export class AppEffects {
 
   getReportData$ = createEffect(() => this.actions$.pipe(
     ofType(getReportData),
-  switchMap((action) => this.getrepo.getReportData(action.id)
+  mergeMap((action) => this.getrepo.getReportData(action.id)
   .pipe(
     map((reportData: ReportData) => getReportDataSuccess({ reportData })),
     catchError(()=> of(getReportDataFailure))

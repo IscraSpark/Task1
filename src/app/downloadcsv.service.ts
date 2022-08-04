@@ -29,6 +29,7 @@ export class DownloadcsvService {
     for (; content.includes(',U'); ) { // move to next line for next user
       content = content.replace(',U', '\nU');
     }
+    
     this.exportFile(content, 'text/csv');
   }
 

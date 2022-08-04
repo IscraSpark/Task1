@@ -6,7 +6,8 @@ import {
   getReport, 
   loginUserSuccess, 
   getReportDataSuccess,
-  getUsersSuccess
+  getUsersSuccess,
+  putForDownload
 } from './app.actions';
 import { state } from '@angular/animations';
 
@@ -16,28 +17,24 @@ export const redTaskFeatureKey = 'redTask';
 export interface StateUser {
  user: User,
  ELEMENT_DATA: UserReports[],
- reportData: ReportData,
- userForAdmin: UserForAdmin
+ reportData: ReportData[],
+ userForAdmin: UserForAdmin,
+ displayedColumns: string[],
+ rows: UserForAdmin[],
 }
 
 export const initialState: StateUser = {
   user: { firstName: '', lastName: '', role:'', token: ''},
   ELEMENT_DATA: [],
-  reportData: {
-    data: {
-      Agreeableness: 0,
-      Drive: 0,
-      Luck: 0,
-      Openess: 0,
-    },
-    type: ''
-  },
+  reportData: [],
   userForAdmin: {
     first_name: '',
     last_name: '',
     email: '',
     groups: []
   },
+  displayedColumns: [],
+  rows: [],
 };
 
 export function userReducer(state: StateUser | undefined, action: Action) {
@@ -57,13 +54,20 @@ export const reducer = createReducer<StateUser>(
     ...state,
     user: user
   })),
-  on(getReportDataSuccess, (state, {reportData}) => ({
+  on(getReportDataSuccess, (state, {reportData}) => {
+    console.log(state);
+     return {
     ...state,
-    reportData: reportData
-  })),
+    reportData: [...state.reportData, reportData]
+  }}),
   on(getUsersSuccess, (state, {user}) => ({
     ...state,
     userForAdmin: user
+  })),
+  on(putForDownload, (state, {displayedColumns, rows}) => ({
+    ...state,
+    displayedColumns: displayedColumns,
+    rows: rows
   })),
 );
 

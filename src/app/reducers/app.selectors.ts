@@ -16,3 +16,10 @@ export const selectUserForAdmin = createSelector(
   selectUserInfoState,
   state => state.reducers.userForAdmin
 );
+
+export const selectDataToDownload = createSelector(
+  selectUserInfoState,
+  state => {let data = { columns: state.reducers.displayedColumns, rows: state.reducers.rows}
+  return data;    
+}
+);

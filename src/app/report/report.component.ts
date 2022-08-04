@@ -20,8 +20,8 @@ export class ReportComponent implements OnInit, OnDestroy {
   ngOnInit() {
     let id: string = this.id;
     this.store.dispatch(getReportData({id}))
-    this.store.select(userInfoSelectors.selectUserReportData).subscribe((report: ReportData) =>{
-      Object.entries(report.data).forEach(([key, value]) => {
+    this.store.select(userInfoSelectors.selectUserReportData).subscribe((report: ReportData[]) =>{
+      Object.entries(report[Number(id)-1].data).forEach(([key, value]) => {
               this.data.push(value);
               this.barChartLabels.push(key);
             });
