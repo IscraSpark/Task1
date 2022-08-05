@@ -6,7 +6,7 @@ import {
   HttpInterceptor,
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { GetrepoService } from './getrepo.service';
+import { GetrepoService } from './services/getrepo.service';
 
 @Injectable()
 export class InterceptorInterceptor implements HttpInterceptor {

@@ -4,9 +4,9 @@ import { Router } from '@angular/router';
 import { catchError, Observable, of, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { AuthService } from '../auth.service';
-import { UserInf, User } from '../interfaces';
-import { loginUser } from '../reducers/app.actions';
+import { AuthService } from '../../services/auth.service';
+import { UserInf, User } from '../../interfaces';
+import { loginUser } from '../../reducers/app.actions';
 
 @Component({
   selector: 'app-login',

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AdsectComponent } from './adsect/adsect.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { GuardService } from './guard.service';
-import { LoginComponent } from './login/login.component';
-import { OnlyAdminGuard } from './onlyadmin.guard';
-import { ReportComponent } from './report/report.component';
+import { AdsectComponent } from './components/adsect/adsect.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { GuardService } from './guards/guard.service';
+import { LoginComponent } from './components/login/login.component';
+import { OnlyAdminGuard } from './guards/onlyadmin.guard';
+import { ReportComponent } from './components/report/report.component';
 
 const routes: Routes = [
   {path: 'login', component: LoginComponent },

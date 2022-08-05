@@ -34,3 +34,8 @@ export interface UserForAdmin {
   email: string;
   groups: string[];
 }
+
+export interface Columns {
+  name: string;
+  key: string;
+}

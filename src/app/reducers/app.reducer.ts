@@ -1,37 +1,36 @@
 import { Action, createReducer, on } from '@ngrx/store';
 import { ReportData, User, UserForAdmin, UserReports } from '../interfaces';
 import { appActions } from '.';
-import { 
-  getReportSuccess, 
-  getReport, 
-  loginUserSuccess, 
+import {
+  getReportSuccess,
+  getReport,
+  loginUserSuccess,
   getReportDataSuccess,
   getUsersSuccess,
-  putForDownload
+  putForDownload,
 } from './app.actions';
 import { state } from '@angular/animations';
-
 
 export const redTaskFeatureKey = 'redTask';
 
 export interface StateUser {
- user: User,
- ELEMENT_DATA: UserReports[],
- reportData: ReportData[],
- userForAdmin: UserForAdmin,
- displayedColumns: string[],
- rows: UserForAdmin[],
+  user: User;
+  ELEMENT_DATA: UserReports[];
+  reportData: ReportData[];
+  userForAdmin: UserForAdmin;
+  displayedColumns: string[];
+  rows: UserForAdmin[];
 }
 
 export const initialState: StateUser = {
-  user: { firstName: '', lastName: '', role:'', token: ''},
+  user: { firstName: '', lastName: '', role: '', token: '' },
   ELEMENT_DATA: [],
   reportData: [],
   userForAdmin: {
     first_name: '',
     last_name: '',
     email: '',
-    groups: []
+    groups: [],
   },
   displayedColumns: [],
   rows: [],
@@ -44,31 +43,30 @@ export function userReducer(state: StateUser | undefined, action: Action) {
 export const reducer = createReducer<StateUser>(
   initialState,
   on(getReport, (state) => ({
-    ...state
-  })),
-  on(getReportSuccess,(state, {repo}) =>({
     ...state,
-    ELEMENT_DATA: repo
   })),
-  on(loginUserSuccess, (state, {user}) =>({
+  on(getReportSuccess, (state, { repo }) => ({
     ...state,
-    user: user
+    ELEMENT_DATA: repo,
   })),
-  on(getReportDataSuccess, (state, {reportData}) => {
+  on(loginUserSuccess, (state, { user }) => ({
+    ...state,
+    user: user,
+  })),
+  on(getReportDataSuccess, (state, { reportData }) => {
     console.log(state);
-     return {
+    return {
+      ...state,
+      reportData: [...state.reportData, reportData],
+    };
+  }),
+  on(getUsersSuccess, (state, { user }) => ({
     ...state,
-    reportData: [...state.reportData, reportData]
-  }}),
-  on(getUsersSuccess, (state, {user}) => ({
-    ...state,
-    userForAdmin: user
+    userForAdmin: user,
   })),
-  on(putForDownload, (state, {displayedColumns, rows}) => ({
+  on(putForDownload, (state, { displayedColumns, rows }) => ({
     ...state,
     displayedColumns: displayedColumns,
-    rows: rows
-  })),
+    rows: rows,
+  }))
 );
-
-

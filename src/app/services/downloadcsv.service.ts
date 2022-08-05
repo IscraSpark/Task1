@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { saveAs } from 'file-saver';
-import { UserForAdmin } from './interfaces';
+import { UserForAdmin } from '../interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -26,10 +26,11 @@ export class DownloadcsvService {
           })
           .join(separator);
       });
-    for (; content.includes(',U'); ) { // move to next line for next user
+    for (; content.includes(',U'); ) {
+      // move to next line for next user
       content = content.replace(',U', '\nU');
     }
-    
+
     this.exportFile(content, 'text/csv');
   }
 
