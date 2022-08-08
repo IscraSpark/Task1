@@ -3,30 +3,30 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { StoreModule } from '@ngrx/store';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { NgChartsModule } from 'ng2-charts';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './components/login/login.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import {MaterialExampleModule} from '../material.module';
-import { NavigateComponent } from './components/navigate/navigate.component';
-import { ReportComponent } from './components/report/report.component';
-import { InterceptorInterceptor } from './interceptor.interceptor';
-import { NgChartsModule } from 'ng2-charts';
-import { AdsectComponent } from './components/adsect/adsect.component';
-import { StoreModule } from '@ngrx/store';
-import { userReducer } from './reducers';
-import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { MaterialExampleModule } from '../material.module';
+import { NavigateComponent } from './components/header/header.component';
+import { ReportComponent } from './components/chartreport/chartreport.component';
+import { InterceptorInterceptor } from './interceptors/interceptor.interceptor';
+import { AdsectComponent } from './components/usertable/usertable.component';
+import { userReducer } from './app-store';
 import { environment } from '../environments/environment';
-import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './reducers/app.effects';
-import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { AppEffects } from './app-store/app.effects';
+import { AuthModule } from './auth/auth.module';
+
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     DashboardComponent,
     NavigateComponent,
     ReportComponent,
@@ -47,7 +47,8 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
     }),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     EffectsModule.forRoot([AppEffects]),
-    StoreRouterConnectingModule.forRoot()
+    StoreRouterConnectingModule.forRoot(),
+    AuthModule
   ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: InterceptorInterceptor, multi: true}

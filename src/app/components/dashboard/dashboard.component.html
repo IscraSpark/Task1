@@ -1,7 +1,7 @@
 <div class="wrapper">
   <app-navigate></app-navigate>
 
-  <ng-container *ngIf="ELEMENT_DATA$ | async as data">
+  <ng-container *ngIf="elementData$ | async as data">
     <table mat-table [dataSource]="data" multiTemplateDataRows class="mat-elevation-z8">
       <ng-container matColumnDef="{{ column.key }}" *ngFor="let column of columnsToDisplay">
         <th mat-header-cell *matHeaderCellDef>{{ column.name }}</th>

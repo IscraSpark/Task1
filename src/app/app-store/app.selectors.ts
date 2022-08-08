@@ -4,7 +4,7 @@ export const selectUserInfoState = (state: any) => state;
 
 export const selectUserReports = createSelector(
   selectUserInfoState,
-  (state) => state.reducers.ELEMENT_DATA
+  (state) => state.reducers.elementData
 );
 
 export const selectUserReportData = createSelector(

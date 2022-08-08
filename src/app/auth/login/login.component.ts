@@ -1,27 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { catchError, Observable, of, Subscription } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { AuthService } from '../../services/auth.service';
-import { UserInf, User } from '../../interfaces';
-import { loginUser } from '../../reducers/app.actions';
+import { UserInf, User } from '../../models/interfaces';
+import { loginUser } from '../../app-store/app.actions';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css'],
+  styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
   constructor(
-    private auth: AuthService,
-    private route: Router,
     private store: Store
       ) {}
   userdata!: UserInf;
   user!: User;
-  sub: Subscription[] = [];
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -63,21 +57,8 @@ export class LoginComponent {
         let userdata: UserInf = { email: email.value, password: password.value };
 
         this.store.dispatch(loginUser({userdata}));
-        // this.sub.push(
-        //   this.auth
-        //     .login(this.userdata)
-        //     .pipe(catchError((err) => err))
-        //     .subscribe((user) => {
-        //       this.user = user as User;
-        //       localStorage.setItem('user', JSON.stringify(this.user)); // save user data
-        //       this.route.navigateByUrl('/dashboard');
-        //     })
-        // );
       }
     }
   }
 
-  ngOnDestroy(): void {
-    this.sub.forEach((el) => el.unsubscribe());
-  }
 }

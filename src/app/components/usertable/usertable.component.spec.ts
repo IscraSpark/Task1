@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NavigateComponent } from './navigate.component';
+import { AdsectComponent } from './usertable.component';
 
-describe('NavigateComponent', () => {
-  let component: NavigateComponent;
-  let fixture: ComponentFixture<NavigateComponent>;
+describe('AdsectComponent', () => {
+  let component: AdsectComponent;
+  let fixture: ComponentFixture<AdsectComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NavigateComponent ]
+      declarations: [ AdsectComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(NavigateComponent);
+    fixture = TestBed.createComponent(AdsectComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -6,7 +6,6 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from '@angular/router';
-import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -18,7 +17,7 @@ export class GuardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree {
-    if (!localStorage.getItem('user')) {
+    if (!JSON.parse(localStorage.getItem('user') as string).token) {
       this.router.navigateByUrl('/login');
       alert('you need to login');
       return false;

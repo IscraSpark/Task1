@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { saveAs } from 'file-saver';
-import { UserForAdmin } from '../interfaces';
+import { UserForAdmin } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root',

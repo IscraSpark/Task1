@@ -12,7 +12,7 @@ import { LocalstorageService } from '../services/localstorage.service';
 @Injectable({
   providedIn: 'root',
 })
-export class OnlyAdminGuard implements CanActivate {
+export class AdminPermissionGuard implements CanActivate {
   constructor(private lsService: LocalstorageService, private router: Router) {}
   canActivate(
     route: ActivatedRouteSnapshot,

@@ -1,12 +1,12 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { ReportData, User, UserForAdmin, UserReports } from '../interfaces';
+import { ReportData, UserForAdmin, UserReports } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root',
 })
-export class GetrepoService {
+export class GetreportService {
   //user!: User;
   constructor(private http: HttpClient) {}
 

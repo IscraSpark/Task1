@@ -1,15 +1,16 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+
 import { DownloadcsvService } from '../../services/downloadcsv.service';
-import { UserForAdmin } from '../../interfaces';
+import { UserForAdmin } from '../../models/interfaces';
 import { LocalstorageService } from '../../services/localstorage.service';
-import { StateUser, userInfoSelectors } from '../../reducers';
+import { StateUser, userInfoSelectors } from '../../app-store';
 
 @Component({
   selector: 'app-navigate',
-  templateUrl: './navigate.component.html',
-  styleUrls: ['./navigate.component.css'],
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
 export class NavigateComponent implements OnInit {
   constructor(
@@ -41,12 +42,15 @@ export class NavigateComponent implements OnInit {
     this.lsserv.removeUser();
     this.router.navigateByUrl('/login');
   }
+
   gotoapan() {
     this.router.navigateByUrl('/adminsection');
   }
+
   gotodash() {
     this.router.navigateByUrl('/dashboard');
   }
+
   download() {
     let displayedColumns: string[] = [];
     let row: UserForAdmin[] = [];
@@ -58,4 +62,5 @@ export class NavigateComponent implements OnInit {
     displayedColumns = displayedColumns.filter((el) => !(el == 'select'));
     this.downl.save(displayedColumns, row);
   }
+  
 }

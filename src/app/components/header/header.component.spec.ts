@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AdsectComponent } from './adsect.component';
+import { NavigateComponent } from './header.component';
 
-describe('AdsectComponent', () => {
-  let component: AdsectComponent;
-  let fixture: ComponentFixture<AdsectComponent>;
+describe('NavigateComponent', () => {
+  let component: NavigateComponent;
+  let fixture: ComponentFixture<NavigateComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdsectComponent ]
+      declarations: [ NavigateComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AdsectComponent);
+    fixture = TestBed.createComponent(NavigateComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

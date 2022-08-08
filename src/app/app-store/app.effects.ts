@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { catchError, switchMap, mergeMap, map, of } from 'rxjs';
-import { AuthService } from '../services/auth.service';
-import { GetrepoService } from '../services/getrepo.service';
+import { Router } from '@angular/router';
+
+import { AuthService } from '../auth/auth.service';
+import { GetreportService } from '../services/getreport.service';
 import {
-  UserInf,
   User,
   UserReports,
   ReportData,
   UserForAdmin,
-} from '../interfaces';
+} from '../models/interfaces';
 import {
   loginUser,
   loginUserSuccess,
@@ -23,8 +24,6 @@ import {
   getUsersSuccess,
   getUsersFailure,
 } from './app.actions';
-import { Router } from '@angular/router';
-import { DownloadcsvService } from '../services/downloadcsv.service';
 import { LocalstorageService } from '../services/localstorage.service';
 
 @Injectable()
@@ -32,7 +31,7 @@ export class AppEffects {
   constructor(
     private actions$: Actions,
     private auth: AuthService,
-    private getrepo: GetrepoService,
+    private getrepo: GetreportService,
     private route: Router,
     private lsserv: LocalstorageService
   ) {}

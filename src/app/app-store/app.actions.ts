@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { ReportData, User, UserForAdmin, UserInf, UserReports } from '../interfaces';
+import { ReportData, User, UserForAdmin, UserInf, UserReports } from '../models/interfaces';
 
 
 export const loginUser = createAction('[Taskact] Login',  props<{ userdata: UserInf}>());

@@ -1,15 +1,15 @@
 <div class="wrapper">
   <app-navigate [downloadWait]="downloadWait"></app-navigate>
 
-  <ng-container *ngIf="ELEMENT_DATA$ | async as data">
+  <ng-container *ngIf="elementData$ | async as data">
     <table mat-table [dataSource]="data" class="mat-elevation-z8 demo-table">
       <!-- Checkbox Column -->
       <ng-container matColumnDef="select">
         <th mat-header-cell *matHeaderCellDef>
           <mat-checkbox
-            (change)="$event ? toggleAllRows() : null"
-            [checked]="selection.hasValue() && isAllSelected()"
-            [indeterminate]="selection.hasValue() && !isAllSelected()"
+            (change)="$event ? toggleAllRows(data) : null"
+            [checked]="selection.hasValue() && (isAllSelected() == data.length)"
+            [indeterminate]="selection.hasValue() && !(isAllSelected() == data.length)"
             [aria-label]="checkboxLabel()"
           >
           </mat-checkbox>

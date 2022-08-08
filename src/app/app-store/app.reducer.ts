@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
-import { ReportData, User, UserForAdmin, UserReports } from '../interfaces';
-import { appActions } from '.';
+
+import { ReportData, User, UserForAdmin, UserReports } from '../models/interfaces';
 import {
   getReportSuccess,
   getReport,
@@ -9,13 +9,12 @@ import {
   getUsersSuccess,
   putForDownload,
 } from './app.actions';
-import { state } from '@angular/animations';
 
 export const redTaskFeatureKey = 'redTask';
 
 export interface StateUser {
   user: User;
-  ELEMENT_DATA: UserReports[];
+  elementData: UserReports[];
   reportData: ReportData[];
   userForAdmin: UserForAdmin;
   displayedColumns: string[];
@@ -24,7 +23,7 @@ export interface StateUser {
 
 export const initialState: StateUser = {
   user: { firstName: '', lastName: '', role: '', token: '' },
-  ELEMENT_DATA: [],
+  elementData: [],
   reportData: [],
   userForAdmin: {
     first_name: '',
@@ -47,7 +46,7 @@ export const reducer = createReducer<StateUser>(
   })),
   on(getReportSuccess, (state, { repo }) => ({
     ...state,
-    ELEMENT_DATA: repo,
+    elementData: repo,
   })),
   on(loginUserSuccess, (state, { user }) => ({
     ...state,
