@@ -8,7 +8,7 @@
         <th mat-header-cell *matHeaderCellDef>
           <mat-checkbox
             (change)="$event ? toggleAllRows(data) : null"
-            [checked]="selection.hasValue() && (isAllSelected() == data.length)"
+            [checked]="selection.hasValue() && isAllSelected() == data.length"
             [indeterminate]="selection.hasValue() && !(isAllSelected() == data.length)"
             [aria-label]="checkboxLabel()"
           >
