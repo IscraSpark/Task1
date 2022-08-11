@@ -1,6 +1,6 @@
 import { Action, createReducer, on } from '@ngrx/store';
 
-import { ReportData, User, UserForAdmin, UserReports } from '../models/interfaces';
+import { IReportData, IUser, IUserForAdmin, IUserReports } from '../models/interfaces';
 import {
   getReportSuccess,
   getReport,
@@ -13,12 +13,12 @@ import {
 export const redTaskFeatureKey = 'redTask';
 
 export interface StateUser {
-  user: User;
-  elementData: UserReports[];
-  reportData: ReportData[];
-  userForAdmin: UserForAdmin;
+  user: IUser;
+  elementData: IUserReports[];
+  reportData: IReportData[];
+  userForAdmin: IUserForAdmin;
   displayedColumns: string[];
-  rows: UserForAdmin[];
+  rows: IUserForAdmin[];
 }
 
 export const initialState: StateUser = {

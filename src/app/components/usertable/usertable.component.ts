@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 
-import { UserForAdmin } from '../../models/interfaces';
+import { IUserForAdmin } from '../../models/interfaces';
 import { getUsers, putForDownload } from '../../app-store/app.actions';
 import { StateUser } from 'src/app/app-store/app.reducer';
 import { selectUserForAdmin } from 'src/app/app-store/app.selectors';
@@ -14,7 +14,7 @@ import { selectUserForAdmin } from 'src/app/app-store/app.selectors';
   styleUrls: ['./usertable.component.scss'],
 })
 export class AdsectComponent implements OnInit {
-  elementData$!: Observable<UserForAdmin[]>;
+  elementData$!: Observable<IUserForAdmin[]>;
   displayedColumns: string[] = [
     'select',
     'first_name',
@@ -22,8 +22,8 @@ export class AdsectComponent implements OnInit {
     'email',
     'groups',
   ];
-  selection = new SelectionModel<UserForAdmin>(true, []);
-  clickedRows = new Set<UserForAdmin>();
+  selection = new SelectionModel<IUserForAdmin>(true, []);
+  clickedRows = new Set<IUserForAdmin>();
   downloadWait: boolean = false; 
 
   constructor(private store: Store<StateUser>) {}
@@ -34,7 +34,7 @@ export class AdsectComponent implements OnInit {
     this.elementData$ = this.store.select(selectUserForAdmin)
   }
 
-  getUser(row: UserForAdmin) {
+  getUser(row: IUserForAdmin) {
     if (!this.clickedRows.has(row)) {
       // mark choosed
       this.clickedRows.add(row);
@@ -60,7 +60,7 @@ export class AdsectComponent implements OnInit {
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
-  toggleAllRows(data: UserForAdmin[]) {
+  toggleAllRows(data: IUserForAdmin[]) {
     if (this.isAllSelected() == data.length) {
       this.selection.clear();
       this.clickedRows.clear();
@@ -71,7 +71,7 @@ export class AdsectComponent implements OnInit {
 
     this.clickedRows.clear();
     this.selection.clear();
-    data.forEach((user: UserForAdmin) => {
+    data.forEach((user: IUserForAdmin) => {
       this.clickedRows.add(user);
       this.selection.toggle(user);
     });
@@ -80,7 +80,7 @@ export class AdsectComponent implements OnInit {
   }
 
   /** The label for the checkbox on the passed row */
-  checkboxLabel(row?: UserForAdmin): string {
+  checkboxLabel(row?: IUserForAdmin): string {
     if (!row) {
       return `${this.isAllSelected() ? 'deselect' : 'select'} all`;
     }
@@ -88,7 +88,7 @@ export class AdsectComponent implements OnInit {
   }
 
   sendToState() {
-    let rows: UserForAdmin[] = [];
+    let rows: IUserForAdmin[] = [];
     this.clickedRows.forEach((el) => rows.push(el));
     let displayedColumns: string[] = this.displayedColumns;
     this.store.dispatch(putForDownload({ displayedColumns, rows }));

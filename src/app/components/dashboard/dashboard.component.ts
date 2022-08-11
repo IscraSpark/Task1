@@ -9,14 +9,14 @@ import {
 } from '@angular/animations';
 import { Store } from '@ngrx/store';
 
-import { Columns, UserReports } from '../../models/interfaces';
+import { IColumns, IUserReports } from '../../models/interfaces';
 import { getReport } from '../../app-store/app.actions';
 import { StateUser } from 'src/app/app-store/app.reducer';
 import { selectUserReports } from 'src/app/app-store/app.selectors';
 
 
 
-const columnData: Columns[] = [
+const columnData: IColumns[] = [
   {name:'No', key: 'id'}, 
   {name:'Name', key:'name'}, 
   {name:'User resolved', key:'users_resolved'},
@@ -39,11 +39,11 @@ const columnData: Columns[] = [
   ],
 })
 export class DashboardComponent implements OnInit {
-  elementData$!: Observable<UserReports[]>;
-  columnsToDisplay: Columns[] = columnData;
+  elementData$!: Observable<IUserReports[]>;
+  columnsToDisplay: IColumns[] = columnData;
   columsName: string[] = [];
   columnsToDisplayWithExpand: any;
-  expandedElement!: UserReports | null;
+  expandedElement!: IUserReports | null;
 
 
   constructor(private store: Store<StateUser>) {}

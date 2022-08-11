@@ -1,16 +1,16 @@
-export interface UserInf {
+export interface IUserInf {
   email: string;
   password: string;
 }
 
-export interface User {
+export interface IUser {
   firstName: string;
   lastName: string;
   role: string;
   token: string;
 }
 
-export interface UserReports {
+export interface IUserReports {
   id: number;
   name: string;
   users_resolved: number;
@@ -18,7 +18,7 @@ export interface UserReports {
   image_url: string;
 }
 
-export interface ReportData {
+export interface IReportData {
   data: {
     Agreeableness: number;
     Drive: number;
@@ -28,14 +28,14 @@ export interface ReportData {
   type: string;
 }
 
-export interface UserForAdmin {
+export interface IUserForAdmin {
   first_name: string;
   last_name: string;
   email: string;
   groups: string[];
 }
 
-export interface Columns {
+export interface IColumns {
   name: string;
   key: string;
 }

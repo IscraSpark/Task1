@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { envinronment } from '../envinronments/envinronments';
-import { ReportData, UserForAdmin, UserReports } from '../models/interfaces';
+import { IReportData, IUserForAdmin, IUserReports } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -10,22 +10,22 @@ import { ReportData, UserForAdmin, UserReports } from '../models/interfaces';
 export class ReportService {
   constructor(private http: HttpClient) {}
 
-  getReport(): Observable<UserReports[]> { // give user reports
-    return this.http.get<UserReports[]>(
+  getReport(): Observable<IUserReports[]> { // give user reports
+    return this.http.get<IUserReports[]>(
       envinronment.reportsUrl
     );
   }
 
-  getReportData(id: string): Observable<ReportData> { //give data for graph
+  getReportData(id: string): Observable<IReportData> { //give data for graph
     let queryParams = new HttpParams().append('id', id);
-    return this.http.get<ReportData>(
+    return this.http.get<IReportData>(
       envinronment.graphUrl,
       { params: queryParams }
     );
   }
 
-  getUser(): Observable<UserForAdmin> { // give user info for admin
-    return this.http.get<UserForAdmin>(
+  getUser(): Observable<IUserForAdmin> { // give user info for admin
+    return this.http.get<IUserForAdmin>(
       envinronment.usersUrl
     );
   }

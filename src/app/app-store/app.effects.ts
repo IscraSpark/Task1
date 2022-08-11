@@ -6,10 +6,10 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth/auth.service';
 import { ReportService } from '../services/getreport.service';
 import {
-  User,
-  UserReports,
-  ReportData,
-  UserForAdmin,
+  IUser,
+  IUserReports,
+  IReportData,
+  IUserForAdmin,
 } from '../models/interfaces';
 import {
   loginUser,
@@ -41,7 +41,7 @@ export class AppEffects {
       ofType(loginUser),
       switchMap((action) =>
         this.auth.login(action.userdata).pipe(
-          map((user: User) => {
+          map((user: IUser) => {
             this.route.navigateByUrl('/dashboard');
             this.lsService.setUser(user);
             return loginUserSuccess({ user });
@@ -56,7 +56,7 @@ export class AppEffects {
       ofType(getReportData),
       mergeMap((action) =>
         this.reportService.getReportData(action.id).pipe(
-          map((reportData: ReportData) => getReportDataSuccess({ reportData })),
+          map((reportData: IReportData) => getReportDataSuccess({ reportData })),
           catchError(() => of(getReportDataFailure))
         )
       )
@@ -68,7 +68,7 @@ export class AppEffects {
       ofType(getUsers),
       switchMap(() =>
         this.reportService.getUser().pipe(
-          map((user: UserForAdmin) => getUsersSuccess({ user })),
+          map((user: IUserForAdmin) => getUsersSuccess({ user })),
           catchError(() => of(getUsersFailure))
         )
       )
@@ -80,7 +80,7 @@ export class AppEffects {
       ofType(getReport),
       switchMap(() =>
         this.reportService.getReport().pipe(
-          map((report: UserReports[]) => getReportSuccess({ report })),
+          map((report: IUserReports[]) => getReportSuccess({ report })),
           catchError(() => of(getReportFailure))
         )
       )

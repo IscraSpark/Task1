@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 
-import { UserInf, User } from '../../models/interfaces';
+import { IUserInf, IUser } from '../../models/interfaces';
 import { loginUser } from '../../app-store/app.actions';
 
 @Component({
@@ -12,8 +12,8 @@ import { loginUser } from '../../app-store/app.actions';
 })
 export class LoginComponent {
   constructor(private store: Store) {}
-  userdata!: UserInf;
-  user!: User;
+  userdata!: IUserInf;
+  user!: IUser;
   form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     password: new FormControl('', [
@@ -52,7 +52,7 @@ export class LoginComponent {
       if (!password.value) {
         password.markAsTouched();
       } else {
-        let userdata: UserInf = { email: email.value, password: password.value };
+        let userdata: IUserInf = { email: email.value, password: password.value };
 
         this.store.dispatch(loginUser({userdata}));
       }

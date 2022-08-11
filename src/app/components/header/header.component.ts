@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 
 import { DownloadcsvService } from '../../services/downloadcsv.service';
-import { UserForAdmin } from '../../models/interfaces';
+import { IUserForAdmin } from '../../models/interfaces';
 import { LocalstorageService } from '../../services/localstorage.service';
 import { selectDataToDownload } from 'src/app/app-store/app.selectors';
 import { StateUser } from 'src/app/app-store/app.reducer';
@@ -54,7 +54,7 @@ export class NavigateComponent implements OnInit {
 
   download() {
     let displayedColumns: string[] = [];
-    let row: UserForAdmin[] = [];
+    let row: IUserForAdmin[] = [];
     let data$ = this.store.select(selectDataToDownload);
     data$.subscribe((data) => {
       row = data.rows;

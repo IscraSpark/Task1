@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { saveAs } from 'file-saver';
 
-import { UserForAdmin } from '../models/interfaces';
+import { IUserForAdmin } from '../models/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +9,7 @@ import { UserForAdmin } from '../models/interfaces';
 export class DownloadcsvService {
   constructor() {}
 
-  save(headers: string[], data: UserForAdmin[]) {
+  save(headers: string[], data: IUserForAdmin[]) {
     if (!data.length) {
       return;
     }
