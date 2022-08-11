@@ -18,10 +18,10 @@ import { NavigateComponent } from './components/header/header.component';
 import { ReportComponent } from './components/chartreport/chartreport.component';
 import { InterceptorInterceptor } from './interceptors/interceptor.interceptor';
 import { AdsectComponent } from './components/usertable/usertable.component';
-import { userReducer } from './app-store';
 import { environment } from '../environments/environment';
 import { AppEffects } from './app-store/app.effects';
 import { AuthModule } from './auth/auth.module';
+import { userReducer } from './app-store/app.reducer';
 
 
 @NgModule({

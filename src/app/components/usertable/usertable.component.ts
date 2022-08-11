@@ -3,9 +3,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 
-import { StateUser, userInfoSelectors } from '../../app-store';
 import { UserForAdmin } from '../../models/interfaces';
 import { getUsers, putForDownload } from '../../app-store/app.actions';
+import { StateUser } from 'src/app/app-store/app.reducer';
+import { selectUserForAdmin } from 'src/app/app-store/app.selectors';
 
 @Component({
   selector: 'app-adsect',
@@ -27,12 +28,10 @@ export class AdsectComponent implements OnInit {
 
   constructor(private store: Store<StateUser>) {}
 
-  
-
   ngOnInit(): void {
 
     this.store.dispatch(getUsers());
-    this.elementData$ = this.store.select(userInfoSelectors.selectUserForAdmin)
+    this.elementData$ = this.store.select(selectUserForAdmin)
   }
 
   getUser(row: UserForAdmin) {
@@ -69,6 +68,7 @@ export class AdsectComponent implements OnInit {
       this.sendToState();
       return;
     }
+
     this.clickedRows.clear();
     this.selection.clear();
     data.forEach((user: UserForAdmin) => {

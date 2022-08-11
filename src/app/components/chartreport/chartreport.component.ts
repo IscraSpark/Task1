@@ -4,7 +4,7 @@ import { Store } from '@ngrx/store';
 
 import { ReportData } from '../../models/interfaces';
 import { getReportData } from '../../app-store/app.actions';
-import { userInfoSelectors } from '../../app-store';
+import { selectUserReportData } from 'src/app/app-store/app.selectors';
 
 @Component({
   selector: 'app-report',
@@ -27,7 +27,7 @@ export class ReportComponent implements OnInit{
     let id: string = this.id;
     this.store.dispatch(getReportData({ id }));
     this.store
-      .select(userInfoSelectors.selectUserReportData)
+      .select(selectUserReportData)
       .subscribe((report: ReportData[]) => {
         Object.entries(report[Number(id) - 1].data).forEach(([key, value]) => {
           this.data.push(value);

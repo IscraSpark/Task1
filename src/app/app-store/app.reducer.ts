@@ -44,9 +44,9 @@ export const reducer = createReducer<StateUser>(
   on(getReport, (state) => ({
     ...state,
   })),
-  on(getReportSuccess, (state, { repo }) => ({
+  on(getReportSuccess, (state, { report }) => ({
     ...state,
-    elementData: repo,
+    elementData: report,
   })),
   on(loginUserSuccess, (state, { user }) => ({
     ...state,

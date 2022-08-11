@@ -4,7 +4,7 @@ import { catchError, switchMap, mergeMap, map, of } from 'rxjs';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../auth/auth.service';
-import { GetreportService } from '../services/getreport.service';
+import { ReportService } from '../services/getreport.service';
 import {
   User,
   UserReports,
@@ -31,9 +31,9 @@ export class AppEffects {
   constructor(
     private actions$: Actions,
     private auth: AuthService,
-    private getrepo: GetreportService,
+    private reportService: ReportService,
     private route: Router,
-    private lsserv: LocalstorageService
+    private lsService: LocalstorageService
   ) {}
 
   loginUser$ = createEffect(() =>
@@ -43,7 +43,7 @@ export class AppEffects {
         this.auth.login(action.userdata).pipe(
           map((user: User) => {
             this.route.navigateByUrl('/dashboard');
-            this.lsserv.setUser(user);
+            this.lsService.setUser(user);
             return loginUserSuccess({ user });
           })
         )
@@ -55,7 +55,7 @@ export class AppEffects {
     this.actions$.pipe(
       ofType(getReportData),
       mergeMap((action) =>
-        this.getrepo.getReportData(action.id).pipe(
+        this.reportService.getReportData(action.id).pipe(
           map((reportData: ReportData) => getReportDataSuccess({ reportData })),
           catchError(() => of(getReportDataFailure))
         )
@@ -67,7 +67,7 @@ export class AppEffects {
     this.actions$.pipe(
       ofType(getUsers),
       switchMap(() =>
-        this.getrepo.getUser().pipe(
+        this.reportService.getUser().pipe(
           map((user: UserForAdmin) => getUsersSuccess({ user })),
           catchError(() => of(getUsersFailure))
         )
@@ -79,8 +79,8 @@ export class AppEffects {
     this.actions$.pipe(
       ofType(getReport),
       switchMap(() =>
-        this.getrepo.getReport().pipe(
-          map((repo: UserReports[]) => getReportSuccess({ repo })),
+        this.reportService.getReport().pipe(
+          map((report: UserReports[]) => getReportSuccess({ report })),
           catchError(() => of(getReportFailure))
         )
       )

@@ -17,12 +17,20 @@ export class GuardService implements CanActivate {
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ): boolean | UrlTree {
-    if (!JSON.parse(localStorage.getItem('user') as string).token) {
-      this.router.navigateByUrl('/login');
-      alert('you need to login');
-      return false;
-    } else {
-      return true;
-    }
+    let user = JSON.parse(localStorage.getItem('user') as string)
+    if (user){
+      if (!user.token) {
+        
+        this.router.navigateByUrl('/login');
+        alert('you need to login');
+        return false;
+      } else {
+        return true;
+      }
+  } else {
+    this.router.navigateByUrl('/login');
+        alert('you need to login');
+        return false;
+  }
   }
 }

@@ -5,7 +5,8 @@ import { Store } from '@ngrx/store';
 import { DownloadcsvService } from '../../services/downloadcsv.service';
 import { UserForAdmin } from '../../models/interfaces';
 import { LocalstorageService } from '../../services/localstorage.service';
-import { StateUser, userInfoSelectors } from '../../app-store';
+import { selectDataToDownload } from 'src/app/app-store/app.selectors';
+import { StateUser } from 'src/app/app-store/app.reducer';
 
 @Component({
   selector: 'app-navigate',
@@ -15,8 +16,8 @@ import { StateUser, userInfoSelectors } from '../../app-store';
 export class NavigateComponent implements OnInit {
   constructor(
     private router: Router,
-    private lsserv: LocalstorageService,
-    private downl: DownloadcsvService,
+    private lsService: LocalstorageService,
+    private downlService: DownloadcsvService,
     private store: Store<StateUser>
   ) {}
   
@@ -26,7 +27,7 @@ export class NavigateComponent implements OnInit {
   visible: boolean = true;
 
   ngOnInit(): void {
-    this.role = this.lsserv.getUserRole();
+    this.role = this.lsService.getUserRole();
 
     if (this.role == 'Admin') {
       this.hide = true;
@@ -39,28 +40,28 @@ export class NavigateComponent implements OnInit {
   }
 
   logout() {
-    this.lsserv.removeUser();
+    this.lsService.removeUser();
     this.router.navigateByUrl('/login');
   }
 
-  gotoapan() {
+  goToAdminPannel() {
     this.router.navigateByUrl('/adminsection');
   }
 
-  gotodash() {
+  goToDashboard() {
     this.router.navigateByUrl('/dashboard');
   }
 
   download() {
     let displayedColumns: string[] = [];
     let row: UserForAdmin[] = [];
-    let data$ = this.store.select(userInfoSelectors.selectDataToDownload);
+    let data$ = this.store.select(selectDataToDownload);
     data$.subscribe((data) => {
       row = data.rows;
       displayedColumns = data.columns;
     });
     displayedColumns = displayedColumns.filter((el) => !(el == 'select'));
-    this.downl.save(displayedColumns, row);
+    this.downlService.save(displayedColumns, row);
   }
   
 }

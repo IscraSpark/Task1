@@ -11,9 +11,7 @@ import { loginUser } from '../../app-store/app.actions';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-  constructor(
-    private store: Store
-      ) {}
+  constructor(private store: Store) {}
   userdata!: UserInf;
   user!: User;
   form: FormGroup = new FormGroup({
